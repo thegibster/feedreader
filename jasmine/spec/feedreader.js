@@ -21,9 +21,14 @@ $(function() {
          * allFeeds in app.js to be an empty array and refresh the
          * page?
          */
-        it('are defined', function() {
+         beforeEach(function(done){
+             done();
+         });
+
+        it('are defined', function(done) {
             expect(allFeeds).toBeDefined();
             expect(allFeeds.length).not.toBe(0);
+            done();
         });
 
 
@@ -31,16 +36,45 @@ $(function() {
          * in the allFeeds object and ensures it has a URL defined
          * and that the URL is not empty.
          */
-
+         function loop_through_url(item){
+            it("has a url defined", function(done) {
+              expect(item.url).not.toBeNull();
+              done();
+          });
+        }
 
         /* TODO: Write a test that loops through each feed
          * in the allFeeds object and ensures it has a name defined
          * and that the name is not empty.
          */
+
+        for(var x = 0; x < allFeeds.length; x++) {
+           loop_through_url(allFeeds[x]);
+         }
+
+          function loop_through_name(item){
+             it("has a name defined", function(done) {
+               expect(item.name).not.toBeNull();
+               done();
+           });
+         }
+
+         for(var x = 0; x < allFeeds.length; x++) {
+            loop_through_name(allFeeds[x]);
+          }
+
+
     });
 
 
     /* TODO: Write a new test suite named "The menu" */
+
+    describe('The menu', function() {
+         var spyEvent;
+         beforeEach(function(done){
+             done();
+           });
+
 
         /* TODO: Write a test that ensures the menu element is
          * hidden by default. You'll have to analyze the HTML and
@@ -53,6 +87,18 @@ $(function() {
           * should have two expectations: does the menu display when
           * clicked and does it hide when clicked again.
           */
+          it ("should invoke the menu icon click event.", function() {
+            spyEvent = spyOn($('.feed-list'), 'click');
+            $('.feed-list').trigger( 'click' );
+
+            expect('click').toHaveBeenTriggeredOn('.feed-list');
+            expect(spyEvent).toHaveBeenCalled();
+          });
+          //   $('.feed-list').click();
+          //        expect($('.feed-list')).toEqual(jasmine.any('menu-hidden'));
+          // });
+});
+
 
     /* TODO: Write a new test suite named "Initial Entries" */
 
