@@ -70,7 +70,7 @@ $(function() {
     /* TODO: Write a new test suite named "The menu" */
 
     describe('The menu', function() {
-         var spyEvent;
+
          beforeEach(function(done){
              done();
            });
@@ -82,25 +82,31 @@ $(function() {
          * hiding/showing of the menu element.
          */
 
+         it ("is menu hidden by default", function() {
+           expect($('body').hasClass('menu-hidden')).toBe(true);
+         });
          /* TODO: Write a test that ensures the menu changes
           * visibility when the menu icon is clicked. This test
           * should have two expectations: does the menu display when
           * clicked and does it hide when clicked again.
           */
-          it ("should invoke the menu icon click event.", function() {
-            spyEvent = spyOn($('.feed-list'), 'click');
-            $('.feed-list').trigger( 'click' );
-
-            expect('click').toHaveBeenTriggeredOn('.feed-list');
-            expect(spyEvent).toHaveBeenCalled();
+          it ("is menu change visibility on clicks", function() {
+            $('.menu-icon-link').click();
+            expect($('body').hasClass('menu-hidden')).toBe(false);
+            $('.menu-icon-link').click();
+            expect($('body').hasClass('menu-hidden')).toBe(true);
           });
-          //   $('.feed-list').click();
-          //        expect($('.feed-list')).toEqual(jasmine.any('menu-hidden'));
-          // });
+
+
 });
 
 
     /* TODO: Write a new test suite named "Initial Entries" */
+       describe('The menu', function() {
+
+             beforeEach(function(done){
+                 done();
+               });
 
         /* TODO: Write a test that ensures when the loadFeed
          * function is called and completes its work, there is at least
@@ -115,4 +121,5 @@ $(function() {
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
+         });
 }());
