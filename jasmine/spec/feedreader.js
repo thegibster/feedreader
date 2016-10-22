@@ -17,7 +17,7 @@ $(function() {
 
          function loop_through_url(item){
             it("has a url defined", function() {
-              expect(item.url).not.toBe(undefined);
+              expect(item.url).toBeDefined();
               expect(item.url.length).not.toEqual(0);
           });
          }
@@ -29,7 +29,8 @@ $(function() {
 
          function loop_through_name(item){
              it("has a name defined", function() {
-               expect(item.name).not.toBeNull();
+               expect(item.name).toBeDefined();
+               expect(item.name.length).not.toEqual(0);
            });
          }
 
@@ -73,7 +74,7 @@ $(function() {
 
           // call asyncFunction and pass it an anonymous callback function
           loadFeed(0);
-          initalValue = $('.feed .entry').eq(0).html();
+          initalValue = $('.feed .entry').html();
           loadFeed(1, function() {
 
               console.log(initalValue);
@@ -85,10 +86,9 @@ $(function() {
           console.log('This console.log will NOT wait for asyncFunction to finish. It will just run after asyncFunction is called'); // only good if this task doesn't need to wait for `asyncFunction` to finish
         }); //.beforeAll
 
-        it ("loadFeed has a change of content ", function(done) {
-          console.log($('.feed .entry').eq(0).html())
-          expect($('.feed .entry').eq(0).html()).not.toEqual(initalValue);
-          done();
+        it ("loadFeed has a change of content ", function() {
+          console.log($('.feed .entry').html());
+          expect($('.feed .entry').html()).not.toEqual(initalValue);
          });
     });
 }());
